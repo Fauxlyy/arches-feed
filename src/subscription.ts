@@ -4,26 +4,52 @@ import {
 } from './lexicon/types/com/atproto/sync/subscribeRepos'
 import { FirehoseSubscriptionBase, getOpsByType } from './util/subscription'
 
+const archesWords = ['arches', 'vn', 
+                    ['cam', 'cameron', 'cammy'],
+                    ['dev', 'devon'],
+                    ['arturo', 'artie']];
+
+
 export class FirehoseSubscription extends FirehoseSubscriptionBase {
   async handleEvent(evt: RepoEvent) {
     if (!isCommit(evt)) return
     const ops = await getOpsByType(evt)
 
-    // This logs the text of every post off the firehose.
-    // Just for fun :)
-    // Delete before actually using
-    for (const post of ops.posts.creates) {
-      console.log(post.record.text)
-    }
-
     const postsToDelete = ops.posts.deletes.map((del) => del.uri)
     const postsToCreate = ops.posts.creates
       .filter((create) => {
-        // only alf-related posts
-        return create.record.text.toLowerCase().includes('alf')
+        const text         = create.record.text.toLowerCase();
+        let   isArchesPost = false
+
+        if (text.includes("#archesvn"))
+        {
+          isArchesPost = true;
+        }
+        else
+        {
+          let matches = 0
+
+          for (let i = 0; i < archesWords.length && matches < 2; i++)
+          {
+            const word    = archesWords[i];
+            const isArray = Array.isArray(word);
+
+            if ((isArray && this.includesStr(text, word)) || 
+               (!isArray && text.includes(word)))
+            {
+              matches++;
+            }
+          }
+
+          if (matches >= 2)
+          {
+            isArchesPost = true;
+          }
+        }
+
+        return isArchesPost;
       })
       .map((create) => {
-        // map alf-related posts to a db row
         return {
           uri: create.uri,
           cid: create.cid,
@@ -44,5 +70,12 @@ export class FirehoseSubscription extends FirehoseSubscriptionBase {
         .onConflict((oc) => oc.doNothing())
         .execute()
     }
+  }
+
+  includesStr(text : string, arr : Array<string>) : boolean
+  {
+    return arr.some(s => {
+      return text.includes(s)
+    })
   }
 }

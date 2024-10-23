@@ -8,28 +8,28 @@ const run = async () => {
 
   // YOUR bluesky handle
   // Ex: user.bsky.social
-  const handle = ''
+  const handle = 'fauxly.bsky.social'
 
   // YOUR bluesky password, or preferably an App Password (found in your client settings)
   // Ex: abcd-1234-efgh-5678
-  const password = ''
+  const password = 'k7py-7iol-7w7h-g3yw'
 
   // A short name for the record that will show in urls
   // Lowercase with no spaces.
   // Ex: whats-hot
-  const recordName = ''
+  const recordName = 'archesvn'
 
   // A display name for your feed
   // Ex: What's Hot
-  const displayName = ''
+  const displayName = 'Arches VN'
 
   // (Optional) A description of your feed
   // Ex: Top trending content from the whole network
-  const description = ''
+  const description = 'A feed for fans of the visual novel Arches including posts with #archesvn or that include enough Arches related words (Cameron, Devon, Arches, vn...)'
 
   // (Optional) The path to an image to be used as your feed's avatar
   // Ex: ~/path/to/avatar.jpeg
-  const avatar: string = ''
+  const avatar: string = 'logo.png'
 
   // -------------------------------------
   // NO NEED TO TOUCH ANYTHING BELOW HERE

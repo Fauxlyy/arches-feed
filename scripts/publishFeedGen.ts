@@ -25,7 +25,7 @@ const run = async () => {
 
   // (Optional) A description of your feed
   // Ex: Top trending content from the whole network
-  const description = 'A feed for fans of the visual novel Arches including posts with #archesvn or that include enough Arches related words (Cameron, Devon, Arches, vn...)'
+  const description = 'A feed for fans of the visual novel Arches\n\nIncludes posts that have the hashtag #archesvn or that contain enough Arches related words (Cameron, Devon, Arches, vn...)'
 
   // (Optional) The path to an image to be used as your feed's avatar
   // Ex: ~/path/to/avatar.jpeg

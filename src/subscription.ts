@@ -35,7 +35,7 @@ export class FirehoseSubscription extends FirehoseSubscriptionBase {
             const isArray = Array.isArray(word);
 
             if ((isArray && this.includesStr(text, word)) || 
-               (!isArray && text.includes(word)))
+               (!isArray && this.containsWholeWord(text, word)))
             {
               matches++;
             }
@@ -72,10 +72,17 @@ export class FirehoseSubscription extends FirehoseSubscriptionBase {
     }
   }
 
-  includesStr(text : string, arr : Array<string>) : boolean
+  includesStr(text: string, arr: Array<string>): boolean
   {
     return arr.some(s => {
-      return text.includes(s)
+      return this.containsWholeWord(text, s);
     })
+  }
+
+  containsWholeWord(text: string, word: string): boolean
+  {
+    const regex = new RegExp(`\\b${word}\\b`);
+    
+    return regex.test(text);
   }
 }

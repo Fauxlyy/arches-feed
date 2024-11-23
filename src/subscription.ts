@@ -4,9 +4,9 @@ import {
 } from './lexicon/types/com/atproto/sync/subscribeRepos'
 import { FirehoseSubscriptionBase, getOpsByType } from './util/subscription'
 
-const need1 = ['#archesvn', 'camdev'];
+const need1 = ['archesvn', 'camdev'];
 
-const need2 = ['arches', 'vn', 'echovn',
+const need2 = ['arches', 'vn',
                     ['cam', 'cameron', 'cammy'],
                     ['dev', 'devon'],
                     ['arturo', 'artie']];
@@ -83,7 +83,7 @@ export class FirehoseSubscription extends FirehoseSubscriptionBase {
 
   containsWholeWord(text: string, word: string): boolean
   {
-    const regex = new RegExp(`\\b${word}\\b`);
+    const regex = new RegExp(`(?:\\W|^)${word}(?:\\W|$)`);
     
     return regex.test(text);
   }

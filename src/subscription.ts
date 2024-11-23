@@ -6,9 +6,9 @@ import { FirehoseSubscriptionBase, getOpsByType } from './util/subscription'
 
 const need1 = ['archesvn', 'camdev'];
 
-const need2 = ['arches', 'vn',
+const need2 = ['arches',
                     ['cam', 'cameron', 'cammy'],
-                    ['dev', 'devon'],
+                    ['vn', 'dev', 'devon'],
                     ['arturo', 'artie']];
 
 

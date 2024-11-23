@@ -4,7 +4,9 @@ import {
 } from './lexicon/types/com/atproto/sync/subscribeRepos'
 import { FirehoseSubscriptionBase, getOpsByType } from './util/subscription'
 
-const archesWords = ['arches', 'vn', 
+const need1 = ['#archesvn', 'camdev'];
+
+const need2 = ['arches', 'vn', 'echovn',
                     ['cam', 'cameron', 'cammy'],
                     ['dev', 'devon'],
                     ['arturo', 'artie']];
@@ -21,7 +23,7 @@ export class FirehoseSubscription extends FirehoseSubscriptionBase {
         const text         = create.record.text.toLowerCase();
         let   isArchesPost = false
 
-        if (text.includes("#archesvn"))
+        if (this.includesStr(text, need1))
         {
           isArchesPost = true;
         }
@@ -29,9 +31,9 @@ export class FirehoseSubscription extends FirehoseSubscriptionBase {
         {
           let matches = 0
 
-          for (let i = 0; i < archesWords.length && matches < 2; i++)
+          for (let i = 0; i < need2.length && matches < 2; i++)
           {
-            const word    = archesWords[i];
+            const word    = need2[i];
             const isArray = Array.isArray(word);
 
             if ((isArray && this.includesStr(text, word)) || 
